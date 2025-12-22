@@ -1,13 +1,13 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.sql.Timestamp;
 
 @Entity
+@Table(name = "influencers")
 public class Influencer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -15,15 +15,17 @@ public class Influencer {
     @Column(unique = true)
     private String socialHandle;
 
-    private String email;
-    private Boolean active = true;
+    private boolean active = true;
 
-    private Timestamp createdAt;
+    public Influencer() {}
 
-    @PrePersist
-    void onCreate() {
-        createdAt = new Timestamp(System.currentTimeMillis());
-    }
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public String getSocialHandle() { return socialHandle; }
+    public boolean isActive() { return active; }
 
-    // getters & setters
+    public void setId(Long id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setSocialHandle(String socialHandle) { this.socialHandle = socialHandle; }
+    public void setActive(boolean active) { this.active = active; }
 }
