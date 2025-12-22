@@ -2,14 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Influencer;
 import com.example.demo.service.InfluencerService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/influencers")
-@Tag(name = "Influencers")
+@RequestMapping("/influencers")
 public class InfluencerController {
 
     private final InfluencerService service;
@@ -18,28 +16,27 @@ public class InfluencerController {
         this.service = service;
     }
 
+    // CREATE
     @PostMapping
     public Influencer create(@RequestBody Influencer influencer) {
-        return service.createInfluencer(influencer);
+        return service.save(influencer);
     }
 
-    @PutMapping("/{id}")
-    public Influencer update(@PathVariable Long id, @RequestBody Influencer influencer) {
-        return service.updateInfluencer(id, influencer);
-    }
-
-    @GetMapping("/{id}")
-    public Influencer getById(@PathVariable Long id) {
-        return service.getInfluencerById(id);
-    }
-
+    // READ ALL
     @GetMapping
     public List<Influencer> getAll() {
-        return service.getAllInfluencers();
+        return service.findAll();
     }
 
-    @PutMapping("/{id}/deactivate")
-    public void deactivate(@PathVariable Long id) {
-        service.deactivateInfluencer(id);
+    // READ BY ID
+    @GetMapping("/{id}")
+    public Influencer getById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }

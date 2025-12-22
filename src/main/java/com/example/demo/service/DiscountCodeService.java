@@ -5,15 +5,11 @@ import java.util.List;
 
 public interface DiscountCodeService {
 
-    DiscountCode createDiscountCode(DiscountCode code);
+    DiscountCode save(DiscountCode discountCode);
 
-    DiscountCode updateDiscountCode(Long id, DiscountCode code);
+    List<DiscountCode> findAll();
 
-    DiscountCode getCodeById(Long id);
+    DiscountCode findById(Long id);
 
-    List<DiscountCode> getCodesByInfluencer(Long influencerId);
-
-    List<DiscountCode> getCodesByCampaign(Long campaignId);
-
-    void deactivateCode(Long id);
+    void delete(Long id);
 }

@@ -10,41 +10,29 @@ import java.util.List;
 @Service
 public class InfluencerServiceImpl implements InfluencerService {
 
-    private final InfluencerRepository repo;
+    private final InfluencerRepository repository;
 
-    public InfluencerServiceImpl(InfluencerRepository repo) {
-        this.repo = repo;
+    public InfluencerServiceImpl(InfluencerRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public Influencer createInfluencer(Influencer influencer) {
-        return repo.save(influencer);
+    public Influencer save(Influencer influencer) {
+        return repository.save(influencer);
     }
 
     @Override
-    public Influencer updateInfluencer(Long id, Influencer influencer) {
-        Influencer existing = getInfluencerById(id);
-        existing.setName(influencer.getName());
-        existing.setEmail(influencer.getEmail());
-        existing.setSocialHandle(influencer.getSocialHandle());
-        return repo.save(existing);
+    public List<Influencer> findAll() {
+        return repository.findAll();
     }
 
     @Override
-    public Influencer getInfluencerById(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Influencer not found"));
+    public Influencer findById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Influencer> getAllInfluencers() {
-        return repo.findAll();
-    }
-
-    @Override
-    public void deactivateInfluencer(Long id) {
-        Influencer influencer = getInfluencerById(id);
-        influencer.setActive(false);
-        repo.save(influencer);
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }

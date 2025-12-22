@@ -10,42 +10,29 @@ import java.util.List;
 @Service
 public class CampaignServiceImpl implements CampaignService {
 
-    private final CampaignRepository repo;
+    private final CampaignRepository repository;
 
-    public CampaignServiceImpl(CampaignRepository repo) {
-        this.repo = repo;
+    public CampaignServiceImpl(CampaignRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public Campaign createCampaign(Campaign campaign) {
-        return repo.save(campaign);
+    public Campaign save(Campaign campaign) {
+        return repository.save(campaign);
     }
 
     @Override
-    public Campaign updateCampaign(Long id, Campaign campaign) {
-        Campaign existing = getCampaignById(id);
-        existing.setCampaignName(campaign.getCampaignName());
-        existing.setStartDate(campaign.getStartDate());
-        existing.setEndDate(campaign.getEndDate());
-        existing.setBudget(campaign.getBudget());
-        return repo.save(existing);
+    public List<Campaign> findAll() {
+        return repository.findAll();
     }
 
     @Override
-    public Campaign getCampaignById(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Campaign not found"));
+    public Campaign findById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Campaign> getAllCampaigns() {
-        return repo.findAll();
-    }
-
-    @Override
-    public void deactivateCampaign(Long id) {
-        Campaign campaign = getCampaignById(id);
-        campaign.setActive(false);
-        repo.save(campaign);
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }

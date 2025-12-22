@@ -5,13 +5,11 @@ import java.util.List;
 
 public interface CampaignService {
 
-    Campaign createCampaign(Campaign campaign);
+    Campaign save(Campaign campaign);
 
-    Campaign updateCampaign(Long id, Campaign campaign);
+    List<Campaign> findAll();
 
-    Campaign getCampaignById(Long id);
+    Campaign findById(Long id);
 
-    List<Campaign> getAllCampaigns();
-
-    void deactivateCampaign(Long id);
+    void delete(Long id);
 }

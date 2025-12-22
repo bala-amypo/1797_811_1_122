@@ -5,13 +5,11 @@ import java.util.List;
 
 public interface SaleTransactionService {
 
-    SaleTransaction logTransaction(SaleTransaction transaction);
+    SaleTransaction save(SaleTransaction transaction);
 
-    SaleTransaction getTransactionById(Long id);
+    List<SaleTransaction> findAll();
 
-    List<SaleTransaction> getSalesForCode(Long codeId);
+    SaleTransaction findById(Long id);
 
-    List<SaleTransaction> getSalesForInfluencer(Long influencerId);
-
-    List<SaleTransaction> getSalesForCampaign(Long campaignId);
+    void delete(Long id);
 }

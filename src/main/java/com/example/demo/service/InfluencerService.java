@@ -5,13 +5,11 @@ import java.util.List;
 
 public interface InfluencerService {
 
-    Influencer createInfluencer(Influencer influencer);
+    Influencer save(Influencer influencer);
 
-    Influencer updateInfluencer(Long id, Influencer influencer);
+    List<Influencer> findAll();
 
-    Influencer getInfluencerById(Long id);
+    Influencer findById(Long id);
 
-    List<Influencer> getAllInfluencers();
-
-    void deactivateInfluencer(Long id);
+    void delete(Long id);
 }

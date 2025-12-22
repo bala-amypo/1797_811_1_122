@@ -10,35 +10,29 @@ import java.util.List;
 @Service
 public class SaleTransactionServiceImpl implements SaleTransactionService {
 
-    private final SaleTransactionRepository repo;
+    private final SaleTransactionRepository repository;
 
-    public SaleTransactionServiceImpl(SaleTransactionRepository repo) {
-        this.repo = repo;
+    public SaleTransactionServiceImpl(SaleTransactionRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public SaleTransaction logTransaction(SaleTransaction transaction) {
-        return repo.save(transaction);
+    public SaleTransaction save(SaleTransaction transaction) {
+        return repository.save(transaction);
     }
 
     @Override
-    public SaleTransaction getTransactionById(Long id) {
-        return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Transaction not found"));
+    public List<SaleTransaction> findAll() {
+        return repository.findAll();
     }
 
     @Override
-    public List<SaleTransaction> getSalesForCode(Long codeId) {
-        return repo.findByDiscountCode_Id(codeId);
+    public SaleTransaction findById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public List<SaleTransaction> getSalesForInfluencer(Long influencerId) {
-        return repo.findByDiscountCode_Influencer_Id(influencerId);
-    }
-
-    @Override
-    public List<SaleTransaction> getSalesForCampaign(Long campaignId) {
-        return repo.findByDiscountCode_Campaign_Id(campaignId);
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }

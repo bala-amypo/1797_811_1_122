@@ -2,14 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Campaign;
 import com.example.demo.service.CampaignService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/campaigns")
-@Tag(name = "Campaigns")
+@RequestMapping("/campaigns")
 public class CampaignController {
 
     private final CampaignService service;
@@ -18,28 +16,27 @@ public class CampaignController {
         this.service = service;
     }
 
+    // CREATE
     @PostMapping
     public Campaign create(@RequestBody Campaign campaign) {
-        return service.createCampaign(campaign);
+        return service.save(campaign);
     }
 
-    @PutMapping("/{id}")
-    public Campaign update(@PathVariable Long id, @RequestBody Campaign campaign) {
-        return service.updateCampaign(id, campaign);
-    }
-
-    @GetMapping("/{id}")
-    public Campaign getById(@PathVariable Long id) {
-        return service.getCampaignById(id);
-    }
-
+    // READ ALL
     @GetMapping
     public List<Campaign> getAll() {
-        return service.getAllCampaigns();
+        return service.findAll();
     }
 
-    @PutMapping("/{id}/deactivate")
-    public void deactivate(@PathVariable Long id) {
-        service.deactivateCampaign(id);
+    // READ BY ID
+    @GetMapping("/{id}")
+    public Campaign getById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }

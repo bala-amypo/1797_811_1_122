@@ -2,14 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.model.DiscountCode;
 import com.example.demo.service.DiscountCodeService;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/discount-codes")
-@Tag(name = "Discount Codes")
+@RequestMapping("/discount-codes")
 public class DiscountCodeController {
 
     private final DiscountCodeService service;
@@ -18,33 +16,27 @@ public class DiscountCodeController {
         this.service = service;
     }
 
+    // CREATE
     @PostMapping
     public DiscountCode create(@RequestBody DiscountCode code) {
-        return service.createDiscountCode(code);
+        return service.save(code);
     }
 
-    @PutMapping("/{id}")
-    public DiscountCode update(@PathVariable Long id, @RequestBody DiscountCode code) {
-        return service.updateDiscountCode(id, code);
+    // READ ALL
+    @GetMapping
+    public List<DiscountCode> getAll() {
+        return service.findAll();
     }
 
+    // READ BY ID
     @GetMapping("/{id}")
     public DiscountCode getById(@PathVariable Long id) {
-        return service.getCodeById(id);
+        return service.findById(id);
     }
 
-    @GetMapping("/influencer/{influencerId}")
-    public List<DiscountCode> getByInfluencer(@PathVariable Long influencerId) {
-        return service.getCodesByInfluencer(influencerId);
-    }
-
-    @GetMapping("/campaign/{campaignId}")
-    public List<DiscountCode> getByCampaign(@PathVariable Long campaignId) {
-        return service.getCodesByCampaign(campaignId);
-    }
-
-    @PutMapping("/{id}/deactivate")
-    public void deactivate(@PathVariable Long id) {
-        service.deactivateCode(id);
+    // DELETE
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }
