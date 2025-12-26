@@ -1,3 +1,3 @@
 public interface RoiService {
-    List<RoiReport> getReportsForInfluencer(Long influencerId);
+  List<RoiReport> getReportsForInfluencer(Long influencerId);
 }
