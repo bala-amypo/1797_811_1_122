@@ -1,11 +1,10 @@
 package com.example.demo.model;
 
 public class Influencer {
-
     private Long id;
     private String name;
     private String socialHandle;
-    private boolean active = true; // default active
+    private boolean active = true;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

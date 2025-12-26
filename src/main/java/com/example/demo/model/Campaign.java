@@ -3,7 +3,6 @@ package com.example.demo.model;
 import java.time.LocalDate;
 
 public class Campaign {
-
     private Long id;
     private String campaignName;
     private LocalDate startDate;

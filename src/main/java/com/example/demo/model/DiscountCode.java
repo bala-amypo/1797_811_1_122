@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 public class DiscountCode {
-
     private Long id;
     private String codeValue;
     private double discountPercentage;

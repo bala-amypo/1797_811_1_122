@@ -3,7 +3,6 @@ package com.example.demo.model;
 import java.math.BigDecimal;
 
 public class RoiReport {
-
     private Long id;
     private BigDecimal totalSales = BigDecimal.ZERO;
     private int totalTransactions;
@@ -14,9 +13,7 @@ public class RoiReport {
     public void setId(Long id) { this.id = id; }
 
     public BigDecimal getTotalSales() { return totalSales; }
-    public void setTotalSales(BigDecimal totalSales) {
-        this.totalSales = totalSales;
-    }
+    public void setTotalSales(BigDecimal totalSales) { this.totalSales = totalSales; }
 
     public int getTotalTransactions() { return totalTransactions; }
     public void setTotalTransactions(int totalTransactions) {

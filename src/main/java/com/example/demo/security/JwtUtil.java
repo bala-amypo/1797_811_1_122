@@ -6,22 +6,22 @@ import org.springframework.stereotype.Component;
 public class JwtUtil {
 
     public String generateToken(String email, String role, Long userId) {
-        return "dummy.jwt.token";
+        return email + "." + role + "." + userId;
     }
 
     public boolean validateToken(String token) {
-        return token != null && !token.isEmpty();
+        return token != null && token.split("\\.").length == 3;
     }
 
     public String extractEmail(String token) {
-        return "user@mail.com";
+        return token.split("\\.")[0];
     }
 
     public String extractRole(String token) {
-        return "ADMIN";
+        return token.split("\\.")[1];
     }
 
     public Long extractUserId(String token) {
-        return 1L;
+        return Long.parseLong(token.split("\\.")[2]);
     }
 }
