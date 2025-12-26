@@ -5,7 +5,7 @@ public class Influencer {
     private Long id;
     private String name;
     private String socialHandle;
-    private boolean active;
+    private boolean active = true; // default active
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

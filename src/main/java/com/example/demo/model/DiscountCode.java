@@ -15,7 +15,9 @@ public class DiscountCode {
     public void setCodeValue(String codeValue) { this.codeValue = codeValue; }
 
     public double getDiscountPercentage() { return discountPercentage; }
-    public void setDiscountPercentage(double discountPercentage) { this.discountPercentage = discountPercentage; }
+    public void setDiscountPercentage(double discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
 
     public Influencer getInfluencer() { return influencer; }
     public void setInfluencer(Influencer influencer) { this.influencer = influencer; }
