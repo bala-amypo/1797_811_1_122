@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface SaleTransactionService {
 
-    SaleTransaction createSale(SaleTransaction transaction);
+    SaleTransaction createSale(SaleTransaction saleTransaction);
 
-    List<SaleTransaction> getSalesForCode(Long discountCodeId);
+    List<SaleTransaction> getSalesForCode(Long codeId);
 
     List<SaleTransaction> getSalesForInfluencer(Long influencerId);
 

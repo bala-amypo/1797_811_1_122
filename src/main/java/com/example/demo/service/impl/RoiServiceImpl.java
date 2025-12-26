@@ -18,6 +18,6 @@ public class RoiServiceImpl implements RoiService {
 
     @Override
     public List<RoiReport> getReportsForInfluencer(Long influencerId) {
-        return roiReportRepository.findAll();
+        return roiReportRepository.findByDiscountCodeInfluencerId(influencerId);
     }
 }

@@ -18,20 +18,17 @@ public class InfluencerServiceImpl implements InfluencerService {
 
     @Override
     public Influencer createInfluencer(Influencer influencer) {
-        if (influencer.getSocialHandle() == null || influencer.getSocialHandle().isBlank()) {
-            throw new RuntimeException("Social handle already exists");
-        }
         return influencerRepository.save(influencer);
-    }
-
-    @Override
-    public List<Influencer> getAllInfluencers() {
-        return influencerRepository.findAll();
     }
 
     @Override
     public Influencer getInfluencerById(Long id) {
         return influencerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Influencer not found"));
+    }
+
+    @Override
+    public List<Influencer> getAllInfluencers() {
+        return influencerRepository.findAll();
     }
 }

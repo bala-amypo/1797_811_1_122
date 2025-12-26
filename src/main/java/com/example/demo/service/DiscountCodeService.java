@@ -1,16 +1,14 @@
 package com.example.demo.service;
 
-import com.example.demo.model.DiscountCode;
+import com.example.demo.model.Campaign;
 
 import java.util.List;
 
-public interface DiscountCodeService {
+public interface CampaignService {
 
-    DiscountCode getDiscountCodeById(Long id);
+    Campaign updateCampaign(Long id, Campaign campaign);
 
-    DiscountCode updateDiscountCode(Long id, DiscountCode discountCode);
+    Campaign getCampaignById(Long id);
 
-    List<DiscountCode> getCodesForInfluencer(Long influencerId);
-
-    List<DiscountCode> getCodesForCampaign(Long campaignId);
+    List<Campaign> getAllCampaigns();
 }

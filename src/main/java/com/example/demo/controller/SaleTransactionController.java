@@ -18,7 +18,8 @@ public class SaleTransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<SaleTransaction> createSale(@RequestBody SaleTransaction saleTransaction) {
+    public ResponseEntity<SaleTransaction> createSale(
+            @RequestBody SaleTransaction saleTransaction) {
         return ResponseEntity.ok(saleTransactionService.createSale(saleTransaction));
     }
 

@@ -18,8 +18,14 @@ public class CampaignServiceImpl implements CampaignService {
 
     @Override
     public Campaign updateCampaign(Long id, Campaign campaign) {
-        campaign.setId(id);
-        return campaignRepository.save(campaign);
+        Campaign existing = campaignRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Campaign not found"));
+
+        existing.setCampaignName(campaign.getCampaignName());
+        existing.setStartDate(campaign.getStartDate());
+        existing.setEndDate(campaign.getEndDate());
+
+        return campaignRepository.save(existing);
     }
 
     @Override
