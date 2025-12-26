@@ -18,8 +18,9 @@ public class CampaignController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Campaign> updateCampaign(@PathVariable Long id,
-                                                   @RequestBody Campaign campaign) {
+    public ResponseEntity<Campaign> updateCampaign(
+            @PathVariable Long id,
+            @RequestBody Campaign campaign) {
         return ResponseEntity.ok(campaignService.updateCampaign(id, campaign));
     }
 
