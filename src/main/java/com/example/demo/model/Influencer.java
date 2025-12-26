@@ -1,21 +1,11 @@
-package com.example.demo.model;
-
-import jakarta.persistence.*;
-
 @Entity
-@Table(name = "influencers")
+@Table(name="influencers")
 public class Influencer {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     private Long id;
-
     private String name;
-
     @Column(unique = true)
     private String socialHandle;
-
-    private boolean active = true;
-
+    private boolean active=true;
     // getters & setters
 }
