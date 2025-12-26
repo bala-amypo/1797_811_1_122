@@ -1,15 +1,6 @@
-package com.example.demo.service;
-
-import com.example.demo.model.SaleTransaction;
-import java.util.List;
-
 public interface SaleTransactionService {
-
-    SaleTransaction save(SaleTransaction transaction);
-
-    List<SaleTransaction> findAll();
-
-    SaleTransaction findById(Long id);
-
-    void delete(Long id);
+    SaleTransaction createSale(SaleTransaction tx);
+    List<SaleTransaction> getSalesForCode(Long codeId);
+    List<SaleTransaction> getSalesForInfluencer(Long influencerId);
+    List<SaleTransaction> getSalesForCampaign(Long campaignId);
 }
