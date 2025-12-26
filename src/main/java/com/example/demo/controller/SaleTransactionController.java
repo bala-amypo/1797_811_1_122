@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/sales")
 public class SaleTransactionController {
 
     private final SaleTransactionService saleTransactionService;
@@ -16,13 +17,14 @@ public class SaleTransactionController {
         this.saleTransactionService = saleTransactionService;
     }
 
-    @PostMapping("/sales")
-    public ResponseEntity<SaleTransaction> createSale(@RequestBody SaleTransaction transaction) {
-        return ResponseEntity.ok(saleTransactionService.createSale(transaction));
+    @PostMapping
+    public ResponseEntity<SaleTransaction> createSale(@RequestBody SaleTransaction saleTransaction) {
+        return ResponseEntity.ok(saleTransactionService.createSale(saleTransaction));
     }
 
-    @GetMapping("/sales/code/{codeId}")
-    public ResponseEntity<List<SaleTransaction>> getSalesForCode(@PathVariable Long codeId) {
+    @GetMapping("/code/{codeId}")
+    public ResponseEntity<List<SaleTransaction>> getSalesForCode(
+            @PathVariable Long codeId) {
         return ResponseEntity.ok(saleTransactionService.getSalesForCode(codeId));
     }
 }

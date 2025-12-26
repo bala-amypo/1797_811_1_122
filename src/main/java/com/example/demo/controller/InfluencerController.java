@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/influencers")
 public class InfluencerController {
 
     private final InfluencerService influencerService;
@@ -16,17 +17,17 @@ public class InfluencerController {
         this.influencerService = influencerService;
     }
 
-    @PostMapping("/influencers")
+    @PostMapping
     public ResponseEntity<Influencer> createInfluencer(@RequestBody Influencer influencer) {
         return ResponseEntity.ok(influencerService.createInfluencer(influencer));
     }
 
-    @GetMapping("/influencers")
+    @GetMapping
     public ResponseEntity<List<Influencer>> getAllInfluencers() {
         return ResponseEntity.ok(influencerService.getAllInfluencers());
     }
 
-    @GetMapping("/influencers/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Influencer> getInfluencer(@PathVariable Long id) {
         return ResponseEntity.ok(influencerService.getInfluencerById(id));
     }

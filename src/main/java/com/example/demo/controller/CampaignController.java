@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/campaigns")
 public class CampaignController {
 
     private final CampaignService campaignService;
@@ -16,18 +17,18 @@ public class CampaignController {
         this.campaignService = campaignService;
     }
 
-    @PutMapping("/campaigns/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Campaign> updateCampaign(@PathVariable Long id,
                                                    @RequestBody Campaign campaign) {
         return ResponseEntity.ok(campaignService.updateCampaign(id, campaign));
     }
 
-    @GetMapping("/campaigns/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Campaign> getCampaign(@PathVariable Long id) {
         return ResponseEntity.ok(campaignService.getCampaignById(id));
     }
 
-    @GetMapping("/campaigns")
+    @GetMapping
     public ResponseEntity<List<Campaign>> getAllCampaigns() {
         return ResponseEntity.ok(campaignService.getAllCampaigns());
     }
