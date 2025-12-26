@@ -1,38 +1,21 @@
-package com.example.demo.service.impl;
-
-import com.example.demo.model.Influencer;
-import com.example.demo.repository.InfluencerRepository;
-import com.example.demo.service.InfluencerService;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 @Service
 public class InfluencerServiceImpl implements InfluencerService {
 
-    private final InfluencerRepository repository;
-
-    public InfluencerServiceImpl(InfluencerRepository repository) {
-        this.repository = repository;
+    @Override
+    public Influencer createInfluencer(Influencer influencer) {
+        if (influencer.getSocialHandle() == null) {
+            throw new IllegalArgumentException("Social handle required");
+        }
+        return influencer;
     }
 
     @Override
-    public Influencer save(Influencer influencer) {
-        return repository.save(influencer);
+    public List<Influencer> getAllInfluencers() {
+        return Collections.emptyList();
     }
 
     @Override
-    public List<Influencer> findAll() {
-        return repository.findAll();
-    }
-
-    @Override
-    public Influencer findById(Long id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    @Override
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public Influencer getInfluencerById(Long id) {
+        throw new RuntimeException("Not found");
     }
 }

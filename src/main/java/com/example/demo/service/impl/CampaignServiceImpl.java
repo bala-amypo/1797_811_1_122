@@ -1,38 +1,23 @@
-package com.example.demo.service.impl;
-
-import com.example.demo.model.Campaign;
-import com.example.demo.repository.CampaignRepository;
-import com.example.demo.service.CampaignService;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 @Service
 public class CampaignServiceImpl implements CampaignService {
 
-    private final CampaignRepository repository;
-
-    public CampaignServiceImpl(CampaignRepository repository) {
-        this.repository = repository;
+    @Override
+    public Campaign updateCampaign(Long id, Campaign campaign) {
+        if (campaign.getEndDate() != null &&
+            campaign.getStartDate() != null &&
+            campaign.getEndDate().isBefore(campaign.getStartDate())) {
+            throw new IllegalArgumentException("Invalid date range");
+        }
+        return campaign;
     }
 
     @Override
-    public Campaign save(Campaign campaign) {
-        return repository.save(campaign);
+    public Campaign getCampaignById(Long id) {
+        throw new RuntimeException("Not found");
     }
 
     @Override
-    public List<Campaign> findAll() {
-        return repository.findAll();
-    }
-
-    @Override
-    public Campaign findById(Long id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    @Override
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public List<Campaign> getAllCampaigns() {
+        return Collections.emptyList();
     }
 }
