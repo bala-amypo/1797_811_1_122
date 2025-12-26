@@ -17,17 +17,25 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
     }
 
     @Override
-    public DiscountCode getDiscountCodeById(Long id) {
-        return discountCodeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Discount code not found"));
+    public DiscountCode createDiscountCode(DiscountCode discountCode) {
+        return discountCodeRepository.save(discountCode);
     }
 
     @Override
-    public DiscountCode updateDiscountCode(Long id, DiscountCode discountCode) {
-        DiscountCode existing = getDiscountCodeById(id);
-        existing.setCodeValue(discountCode.getCodeValue());
-        existing.setDiscountPercentage(discountCode.getDiscountPercentage());
+    public DiscountCode updateDiscountCode(Long id, DiscountCode updated) {
+        DiscountCode existing = discountCodeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Discount code not found"));
+
+        existing.setCodeValue(updated.getCodeValue());
+        existing.setDiscountPercentage(updated.getDiscountPercentage());
+
         return discountCodeRepository.save(existing);
+    }
+
+    @Override
+    public DiscountCode getDiscountCodeById(Long id) {
+        return discountCodeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Discount code not found"));
     }
 
     @Override

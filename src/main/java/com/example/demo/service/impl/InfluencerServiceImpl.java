@@ -31,4 +31,18 @@ public class InfluencerServiceImpl implements InfluencerService {
     public List<Influencer> getAllInfluencers() {
         return influencerRepository.findAll();
     }
+
+    @Override
+    public Influencer updateInfluencer(Long id, Influencer influencer) {
+        Influencer existing = getInfluencerById(id);
+        existing.setName(influencer.getName());
+        existing.setSocialHandle(influencer.getSocialHandle());
+        existing.setActive(influencer.isActive());
+        return influencerRepository.save(existing);
+    }
+
+    @Override
+    public void deleteInfluencer(Long id) {
+        influencerRepository.deleteById(id);
+    }
 }

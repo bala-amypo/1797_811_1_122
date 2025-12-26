@@ -17,6 +17,11 @@ public class CampaignServiceImpl implements CampaignService {
     }
 
     @Override
+    public Campaign createCampaign(Campaign campaign) {
+        return campaignRepository.save(campaign);
+    }
+
+    @Override
     public Campaign updateCampaign(Long id, Campaign campaign) {
         Campaign existing = campaignRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Campaign not found"));
@@ -37,5 +42,10 @@ public class CampaignServiceImpl implements CampaignService {
     @Override
     public List<Campaign> getAllCampaigns() {
         return campaignRepository.findAll();
+    }
+
+    @Override
+    public void deleteCampaign(Long id) {
+        campaignRepository.deleteById(id);
     }
 }

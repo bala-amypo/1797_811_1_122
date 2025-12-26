@@ -5,7 +5,6 @@ import com.example.demo.repository.SaleTransactionRepository;
 import com.example.demo.service.SaleTransactionService;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -18,25 +17,25 @@ public class SaleTransactionServiceImpl implements SaleTransactionService {
     }
 
     @Override
-    public SaleTransaction createSale(SaleTransaction saleTransaction) {
-        if (saleTransaction.getTransactionAmount().compareTo(BigDecimal.ZERO) <= 0) {
+    public SaleTransaction createSale(SaleTransaction transaction) {
+        if (transaction.getTransactionAmount().signum() <= 0) {
             throw new IllegalArgumentException("Transaction amount must be > 0");
         }
-        return saleTransactionRepository.save(saleTransaction);
+        return saleTransactionRepository.save(transaction);
     }
 
     @Override
     public List<SaleTransaction> getSalesForCode(Long codeId) {
-        return saleTransactionRepository.findByDiscountCodeId(codeId);
+        return saleTransactionRepository.findAll();
     }
 
     @Override
     public List<SaleTransaction> getSalesForInfluencer(Long influencerId) {
-        return saleTransactionRepository.findByInfluencerId(influencerId);
+        return saleTransactionRepository.findByDiscountCodeInfluencerId(influencerId);
     }
 
     @Override
     public List<SaleTransaction> getSalesForCampaign(Long campaignId) {
-        return saleTransactionRepository.findByCampaignId(campaignId);
+        return saleTransactionRepository.findByDiscountCodeCampaignId(campaignId);
     }
 }
