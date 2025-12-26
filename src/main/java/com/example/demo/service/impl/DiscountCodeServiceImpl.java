@@ -1,38 +1,48 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.DiscountCode;
-import com.example.demo.repository.DiscountCodeRepository;
 import com.example.demo.service.DiscountCodeService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DiscountCodeServiceImpl implements DiscountCodeService {
 
-    private final DiscountCodeRepository repository;
+    private final List<DiscountCode> codes = new ArrayList<>();
 
-    public DiscountCodeServiceImpl(DiscountCodeRepository repository) {
-        this.repository = repository;
+    @Override
+    public DiscountCode getDiscountCodeById(Long id) {
+        return codes.stream()
+                .filter(c -> c.getId() != null && c.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Discount code not found"));
     }
 
     @Override
-    public DiscountCode save(DiscountCode discountCode) {
-        return repository.save(discountCode);
+    public DiscountCode updateDiscountCode(Long id, DiscountCode code) {
+        code.setId(id);
+        codes.add(code);
+        return code;
     }
 
     @Override
-    public List<DiscountCode> findAll() {
-        return repository.findAll();
+    public List<DiscountCode> getCodesForInfluencer(Long influencerId) {
+        return codes.stream()
+                .filter(c -> c.getInfluencer() != null &&
+                        c.getInfluencer().getId() != null &&
+                        c.getInfluencer().getId().equals(influencerId))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public DiscountCode findById(Long id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    @Override
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public List<DiscountCode> getCodesForCampaign(Long campaignId) {
+        return codes.stream()
+                .filter(c -> c.getCampaign() != null &&
+                        c.getCampaign().getId() != null &&
+                        c.getCampaign().getId().equals(campaignId))
+                .collect(Collectors.toList());
     }
 }

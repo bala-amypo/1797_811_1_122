@@ -2,47 +2,33 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Campaign;
 import com.example.demo.service.CampaignService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/campaigns")
 public class CampaignController {
 
-    private final CampaignService service;
+    private final CampaignService campaignService;
 
-    public CampaignController(CampaignService service) {
-        this.service = service;
+    public CampaignController(CampaignService campaignService) {
+        this.campaignService = campaignService;
     }
 
-    // CREATE
-    @PostMapping
-    public Campaign create(@RequestBody Campaign campaign) {
-        return service.save(campaign);
+    @PutMapping("/campaigns/{id}")
+    public ResponseEntity<Campaign> updateCampaign(@PathVariable Long id,
+                                                   @RequestBody Campaign campaign) {
+        return ResponseEntity.ok(campaignService.updateCampaign(id, campaign));
     }
 
-    // READ ALL
-    @GetMapping
-    public List<Campaign> getAll() {
-        return service.findAll();
+    @GetMapping("/campaigns/{id}")
+    public ResponseEntity<Campaign> getCampaign(@PathVariable Long id) {
+        return ResponseEntity.ok(campaignService.getCampaignById(id));
     }
 
-    // READ BY ID
-    @GetMapping("/{id}")
-    public Campaign getById(@PathVariable Long id) {
-        return service.findById(id);
-    }
-
-    // DELETE
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
-    }
-
-    // UPDATE
-    @UpdateMapping("/{id}")
-    public void delete(@PathVariable long id){
-        service.update(id);
+    @GetMapping("/campaigns")
+    public ResponseEntity<List<Campaign>> getAllCampaigns() {
+        return ResponseEntity.ok(campaignService.getAllCampaigns());
     }
 }
