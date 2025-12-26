@@ -1,14 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Influencer;
-
+import com.example.demo.model.Campaign;
 import java.util.List;
 
-public interface InfluencerService {
-
-    Influencer createInfluencer(Influencer influencer);
-
-    Influencer getInfluencerById(Long id);
-
-    List<Influencer> getAllInfluencers();
+public interface CampaignService {
+    Campaign createCampaign(Campaign campaign);
+    Campaign updateCampaign(Long id, Campaign campaign);
+    Campaign getCampaignById(Long id);
+    List<Campaign> getAllCampaigns();
+    void deleteCampaign(Long id);
 }
