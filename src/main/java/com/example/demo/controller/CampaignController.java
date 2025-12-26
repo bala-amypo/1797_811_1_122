@@ -39,4 +39,10 @@ public class CampaignController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    // UPDATE
+    @UpdateMapping("/{id}")
+    public void delete(@PathVariable long id){
+        service.update(id);
+    }
 }
