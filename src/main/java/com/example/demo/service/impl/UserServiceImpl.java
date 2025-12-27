@@ -5,8 +5,6 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -16,17 +14,20 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    // ✅ REQUIRED by UserService
     @Override
     public User register(User user) {
-        user.setCreatedAt(LocalDateTime.now());
         return userRepository.save(user);
     }
 
-    // ✅ REQUIRED by UserService
     @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email)
+    public String login(String email, String password) {
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!user.getPassword().equals(password)) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return "Login successful";
     }
 }
