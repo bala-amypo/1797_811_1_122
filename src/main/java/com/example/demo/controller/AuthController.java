@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.User;
+import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,19 +11,35 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final UserService userService;
+    private final JwtUtil jwtUtil;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return userService.register(user);
+    public ResponseEntity<String> register(@RequestBody User user) {
+        User saved = userService.register(user);
+        String token = jwtUtil.generateToken(
+                saved.getEmail(),
+                saved.getRole(),
+                saved.getId()
+        );
+        return ResponseEntity.ok(token);
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String email,
-                        @RequestParam String password) {
-        return userService.login(email, password);
+    public ResponseEntity<String> login(
+            @RequestParam String email,
+            @RequestParam String password) {
+
+        User user = userService.login(email, password);
+        String token = jwtUtil.generateToken(
+                user.getEmail(),
+                user.getRole(),
+                user.getId()
+        );
+        return ResponseEntity.ok(token);
     }
 }

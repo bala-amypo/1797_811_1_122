@@ -1,16 +1,27 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.RoiReport;
 import com.example.demo.service.RoiService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/roi")
+@RequestMapping("/roi-reports") // 👈 THIS is what Swagger needs
 public class RoiReportController {
 
     private final RoiService roiService;
 
     public RoiReportController(RoiService roiService) {
         this.roiService = roiService;
+    }
+
+    @GetMapping("/influencer/{influencerId}")
+    public ResponseEntity<List<RoiReport>> getReportsForInfluencer(
+            @PathVariable Long influencerId) {
+        return ResponseEntity.ok(
+                roiService.getReportsForInfluencer(influencerId)
+        );
     }
 }
